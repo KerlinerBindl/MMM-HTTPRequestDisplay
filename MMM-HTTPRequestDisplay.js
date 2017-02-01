@@ -16,7 +16,14 @@ Module.register("MMM-HTTPRequestDisplay",{
 		initialLoadDelay: 2500, // 2.5 seconds delay
 		retryDelay: 2500, // retry delay
 		animationSpeed: 2500, // animation speed
-		httpRequestURL: ""
+		httpRequestURL: "",
+		user: "userForWebServices",
+		password: "passForWebServices",
+		ip: "192.168.13.45",
+		port: 99,
+		control: "VirtaulTest",
+		state: "state"
+		// http://admin:password@MeinMiniserver/dev/sps/io/Wohnzimmerlicht/state
 	},
 
 	// Define start sequence.
@@ -54,7 +61,8 @@ Module.register("MMM-HTTPRequestDisplay",{
 		span.innerHTML = "&nbsp;";
 
 		if(this.config.httpRequestURL === null || this.config.httpRequestURL === ""){
-			wrapper.innerHTML = "Please set your request URL target in your config file</br>See ReadMe for more information";
+			wrapper.innerHTML = "Bitte die URL in der Config Datei einpflegen</br>Schaue in die Bschreibung";
+			//wrapper.innerHTML = "Please set your request URL target in your config file</br>See ReadMe for more information";
 
 		}
 
@@ -69,7 +77,8 @@ Module.register("MMM-HTTPRequestDisplay",{
 			wrapper.innerHTML = "No Results";
 			}
 			else {
-				wrapper.innerHTML = "Awaiting Results..."
+				wrapper.innerHTML = "Erwarte Resultate..."
+				//wrapper.innerHTML = "Awaiting Results..."
 			}
 		}
 		else {
