@@ -142,9 +142,6 @@ Module.register("MMM-HTTPRequestDisplay",{
 updateRequest: function() {
 	var self = this;
 	var retry = true;
-	if(this.password==""){
-		Log.info("Fehler, das Passwort in der "+this.name+".config ist falsch oder leer. Bitte anpassen!");
-	}
 	var xhttp = new XMLHttpRequest();
 	xhhtp.withCredentials = true;
 	xhhtp.setRequestHeader("Authorization", "Basic " + btoa("username:password"));
