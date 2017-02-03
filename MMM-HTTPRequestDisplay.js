@@ -59,7 +59,7 @@ Module.register("MMM-HTTPRequestDisplay",{
 
 		}
 		
-		if(this.password === null || this.password === ""){
+		else if(this.password === null || this.password === ""){
 			wrapper.innerHTML = "es wurde in der Config kein Password für Loxone hinterlegt</br>See ReadMe for more information";
 		}
 
