@@ -58,6 +58,10 @@ Module.register("MMM-HTTPRequestDisplay",{
 			wrapper.innerHTML = "Please set your request URL target in your config file</br>See ReadMe for more information";
 
 		}
+		
+		if(this.password === null || this.password === ""){
+			wrapper.innerHTML = "es wurde in der Config kein Password für Loxone hinterlegt</br>See ReadMe for more information";
+		}
 
 		// Signals an issue with the HTTP Requeset
 		else if(this.failureFlag){
@@ -142,7 +146,10 @@ updateRequest: function() {
 		Log.info("Fehler, das Passwort in der "+this.name+".config ist falsch oder leer. Bitte anpassen!");
 	}
 	var xhttp = new XMLHttpRequest();
-	xhttp.open("GET", this.config.httpRequestURL, true);
+	xhhtp.withCredentials = true;
+	xhhtp.setRequestHeader("Authorization", "Basic " + btoa("username:password"));
+	xhttp.open("GET", this.config.httpRequestURL, true, this.user, this.password);
+	
 	xhttp.onreadystatechange = function() {
 		if (this.readyState === 4) {
 			if (this.status === 200) {
