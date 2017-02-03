@@ -142,7 +142,7 @@ Module.register("MMM-HTTPRequestDisplay",{
 		return this.nodes[index];
 	},
 
-/*
+
 updateRequest: function() {
 	var self = this;
 	var retry = true;
@@ -155,11 +155,13 @@ updateRequest: function() {
 				self.requestComplete = true;
 				self.processData(this.responseXML);
 				self.updateDom(self.config.animationSpeed);
+				log.info(this.name + " : " + this.readyState + " , " + this.status);
 			}
 			else {
 				self.failureFlag = true;
 				self.status = this.status;
 				self.updateDom(self.config.animationSpeed);
+				Log.info(this.name + " : Fehlercode : " + this.readyState + " , " + this.status);
 			}
 
 			if (retry) {
@@ -169,31 +171,7 @@ updateRequest: function() {
 	};
 	xhttp.send();
 },
-*/
-updateRequest: function() {
-	var self = this;
-	var retry = true;
 
-	var xhttp = new XMLHttpRequest();
-	xhttp.open("GET", this.config.httpRequestURL, true);
-	xhttp.onreadystatechange = function() {
-		if (this.readyState === 4 && this.status === 200) {
-			self.requestComplete = true;
-			self.processData(this.responseXML);
-			self.updateDom(self.config.animationSpeed);
-		}
-		else {
-			self.failureFlag = true;
-			self.status = this.status;
-			log.info(this.name + ", Fehler : "+ this.readystate + " , " this.status);
-			self.updateDom(self.config.animationSpeed);
-		}
-		if (retry) {
-			self.scheduleUpdate((self.loaded) ? -1 : self.config.retryDelay);
-		}
-	};
-	xhttp.send();
-},	
 	
 updateRequestWithUserPass: function() {
 	var self = this;
@@ -210,7 +188,7 @@ updateRequestWithUserPass: function() {
 		else {
 			self.failureFlag = true;
 			self.status = this.status;
-			log.info(this.name + ", Fehler : "+ this.status);
+			Log.info(this.name + ", Fehler : "+ this.status);
 			self.updateDom(self.config.animationSpeed);
 		}
 		if (retry) {
