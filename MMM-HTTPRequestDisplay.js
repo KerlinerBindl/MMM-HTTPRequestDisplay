@@ -175,7 +175,7 @@ updateRequest: function() {
 	var retry = true;
 
 	var xhttp = new XMLHttpRequest();
-	xhttp.open("GET", this.config.httpRequestURL, true, this.user, this.password);
+	xhttp.open("GET", this.config.httpRequestURL, true);
 	xhttp.onreadystatechange = function() {
 		if (this.readyState === 4 && this.status === 200) {
 			self.requestComplete = true;
