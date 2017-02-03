@@ -142,7 +142,7 @@ Module.register("MMM-HTTPRequestDisplay",{
 		return this.nodes[index];
 	},
 
-
+/*
 updateRequest: function() {
 	var self = this;
 	var retry = true;
@@ -169,6 +169,31 @@ updateRequest: function() {
 	};
 	xhttp.send();
 },
+*/
+updateRequest: function() {
+	var self = this;
+	var retry = true;
+
+	var xhttp = new XMLHttpRequest();
+	xhttp.open("GET", this.config.httpRequestURL, true, this.user, this.password);
+	xhttp.onreadystatechange = function() {
+		if (this.readyState === 4 && this.status === 200) {
+			self.requestComplete = true;
+			self.processData(this.responseXML);
+			self.updateDom(self.config.animationSpeed);
+		}
+		else {
+			self.failureFlag = true;
+			self.status = this.status;
+			log.info(this.name + ", Fehler : "+ this.readystate + " , " this.status);
+			self.updateDom(self.config.animationSpeed);
+		}
+		if (retry) {
+			self.scheduleUpdate((self.loaded) ? -1 : self.config.retryDelay);
+		}
+	};
+	xhttp.send();
+},	
 	
 updateRequestWithUserPass: function() {
 	var self = this;
