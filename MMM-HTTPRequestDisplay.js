@@ -110,12 +110,28 @@ Module.register("MMM-HTTPRequestDisplay",{
 		container.innerHTML = nodeTitle + nodeValue;
 		return container;
 	},
-
+	/*
 	wrapAttribute : function(attribute){
 		var container, attributeTitle, attributeValue;
 		attributeTitle = attribute[0];
 		container = document.createElement("div");
 		if(attribute[1] === null){
+			attributeValue = "No Value";
+		}
+		else {
+			attributeValue = " : " + attribute[1];
+		}
+		container.className = "attribute-title bright small center";
+		container.innerHTML = attributeTitle + attributeValue;
+
+		return container;
+	},	
+	*/
+	wrapAttribute : function(attribute){
+		var container, attributeTitle, attributeValue;
+		attributeTitle = attribute[0];
+		container = document.createElement("div");
+		if(attribute[0] === null){
 			attributeValue = "No Value";
 		}
 		else {
