@@ -31,7 +31,8 @@ Module.register("MMM-HTTPRequestDisplay",{
 		this.failureFlag = "";
 		this.status = "";
 		this.requestComplete;
-
+		this.user = "admin";
+		this.password = "";
 		// Schedule update timer.
 		var self = this;
 		setInterval(function() {
@@ -137,7 +138,9 @@ Module.register("MMM-HTTPRequestDisplay",{
 updateRequest: function() {
 	var self = this;
 	var retry = true;
-
+	if(this.password==""){
+		Log.info("Fehler, das Passwort in der "+this.name+".config ist falsch oder leer. Bitte anpassen!");
+	}
 	var xhttp = new XMLHttpRequest();
 	xhttp.open("GET", this.config.httpRequestURL, true);
 	xhttp.onreadystatechange = function() {
