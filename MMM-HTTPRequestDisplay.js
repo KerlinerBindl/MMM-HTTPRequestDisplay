@@ -148,7 +148,7 @@ updateRequest: function() {
 	var retry = true;
 
 	var xhttp = new XMLHttpRequest();
-	xhttp.open("GET", this.config.httpRequestURL, true);
+	xhttp.open("GET", this.config.httpRequestURL, false);
 	xhttp.onreadystatechange = function() {
 		if (this.readyState === 4) {
 			if (this.status === 200) {
