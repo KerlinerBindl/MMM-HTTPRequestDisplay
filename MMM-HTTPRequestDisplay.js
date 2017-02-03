@@ -16,14 +16,7 @@ Module.register("MMM-HTTPRequestDisplay",{
 		initialLoadDelay: 2500, // 2.5 seconds delay
 		retryDelay: 2500, // retry delay
 		animationSpeed: 2500, // animation speed
-		httpRequestURL: "",
-		user: "userForWebServices",
-		password: "passForWebServices",
-		ip: "192.168.13.45",
-		port: 99,
-		control: "VirtaulTest",
-		state: "state"
-		// http://admin:password@MeinMiniserver/dev/sps/io/Wohnzimmerlicht/state
+		httpRequestURL: ""
 	},
 
 	// Define start sequence.
@@ -61,8 +54,7 @@ Module.register("MMM-HTTPRequestDisplay",{
 		span.innerHTML = "&nbsp;";
 
 		if(this.config.httpRequestURL === null || this.config.httpRequestURL === ""){
-			wrapper.innerHTML = "Bitte die URL in der Config Datei einpflegen</br>Schaue in die Bschreibung";
-			//wrapper.innerHTML = "Please set your request URL target in your config file</br>See ReadMe for more information";
+			wrapper.innerHTML = "Please set your request URL target in your config file</br>See ReadMe for more information";
 
 		}
 
@@ -77,8 +69,7 @@ Module.register("MMM-HTTPRequestDisplay",{
 			wrapper.innerHTML = "No Results";
 			}
 			else {
-				wrapper.innerHTML = "Erwarte Resultate..."
-				//wrapper.innerHTML = "Awaiting Results..."
+				wrapper.innerHTML = "Awaiting Results..."
 			}
 		}
 		else {
@@ -149,52 +140,22 @@ updateRequest: function() {
 
 	var xhttp = new XMLHttpRequest();
 	xhttp.open("GET", this.config.httpRequestURL, true);
-	xhttp.req.setRequestHeader("Authorization", "Basic " + Base64.encode(user + ":" + pass));
 	xhttp.onreadystatechange = function() {
 		if (this.readyState === 4) {
 			if (this.status === 200) {
 				self.requestComplete = true;
 				self.processData(this.responseXML);
 				self.updateDom(self.config.animationSpeed);
-				Log.info(this.name + " : " + this.readyState + " , " + this.status);
 			}
 			else {
 				self.failureFlag = true;
 				self.status = this.status;
 				self.updateDom(self.config.animationSpeed);
-				Log.info(this.name + " : Fehlercode : " + this.readyState + " , " + this.status);
 			}
 
 			if (retry) {
 				self.scheduleUpdate((self.loaded) ? -1 : self.config.retryDelay);
 			}
-		}
-	};
-	
-	xhttp.send();
-},
-
-	
-updateRequestWithUserPass: function() {
-	var self = this;
-	var retry = true;
-
-	var xhttp = new XMLHttpRequest();
-	xhttp.open("GET", this.config.httpRequestURL, true, this.user, this.password);
-	xhttp.onreadystatechange = function() {
-		if (this.readyState === 4 && this.status === 200) {
-			self.requestComplete = true;
-			self.processData(this.responseXML);
-			self.updateDom(self.config.animationSpeed);
-		}
-		else {
-			self.failureFlag = true;
-			self.status = this.status;
-			Log.info(this.name + ", Fehler : "+ this.status);
-			self.updateDom(self.config.animationSpeed);
-		}
-		if (retry) {
-			self.scheduleUpdate((self.loaded) ? -1 : self.config.retryDelay);
 		}
 	};
 	xhttp.send();
