@@ -144,7 +144,7 @@ updateRequest: function() {
 	var retry = true;
 	var xhttp = new XMLHttpRequest();
 	xhttp.open("GET", this.config.httpRequestURL, true, this.user, this.password);
-	xhhtp.withCredentials = true;
+	//xhhtp.withCredentials = true;
 	xhhtp.setRequestHeader("Authorization", "Basic " + btoa("username:password"));
 	xhttp.onreadystatechange = function() {
 		if (this.readyState === 4) {
