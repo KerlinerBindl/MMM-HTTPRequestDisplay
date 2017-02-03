@@ -58,11 +58,11 @@ Module.register("MMM-HTTPRequestDisplay",{
 			wrapper.innerHTML = "Please set your request URL target in your config file</br>See ReadMe for more information";
 
 		}
-		
+		/*
 		else if(this.password === null || this.password === ""){
 			wrapper.innerHTML = "es wurde in der Config kein Password für Loxone hinterlegt</br>See ReadMe for more information";
 		}
-
+		*/
 		// Signals an issue with the HTTP Requeset
 		else if(this.failureFlag){
 			wrapper.innerHTML = "HTTP Request Failed. Status : " + this.status + "</br>Please check the request URL in the module config";
