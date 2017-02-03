@@ -148,14 +148,15 @@ updateRequest: function() {
 	var retry = true;
 
 	var xhttp = new XMLHttpRequest();
-	xhttp.open("GET", this.config.httpRequestURL, false);
+	xhttp.open("GET", this.config.httpRequestURL, true);
+	xhttp.req.setRequestHeader("Authorization", "Basic " + btoa(this.user + ":" + this.pass));
 	xhttp.onreadystatechange = function() {
 		if (this.readyState === 4) {
 			if (this.status === 200) {
 				self.requestComplete = true;
 				self.processData(this.responseXML);
 				self.updateDom(self.config.animationSpeed);
-				log.info(this.name + " : " + this.readyState + " , " + this.status);
+				Log.info(this.name + " : " + this.readyState + " , " + this.status);
 			}
 			else {
 				self.failureFlag = true;
@@ -169,6 +170,7 @@ updateRequest: function() {
 			}
 		}
 	};
+	
 	xhttp.send();
 },
 
