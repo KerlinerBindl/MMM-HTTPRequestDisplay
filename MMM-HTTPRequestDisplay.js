@@ -149,7 +149,7 @@ updateRequest: function() {
 
 	var xhttp = new XMLHttpRequest();
 	xhttp.open("GET", this.config.httpRequestURL, true);
-	xhttp.req.setRequestHeader("Authorization", "Basic " + btoa(this.user + ":" + this.pass));
+	xhttp.req.setRequestHeader("Authorization", "Basic " + Base64.encode(user + ":" + pass));
 	xhttp.onreadystatechange = function() {
 		if (this.readyState === 4) {
 			if (this.status === 200) {
